@@ -28,5 +28,14 @@ Instruksjoner for å starte STUN-serveren
 ## Tests
 Hvordan en kan kjøre eventulle tester
 
-## API documentation
+## Links
+
+### - [Documentation](https://jesper-hustad.github.io/STUN-server/index.html)
+Read trough the documentation for a better understanding of the inner workings of the code.
+
+### - API docs
+Find available endpoints, our api is documented in swagger.
+
 Eventuell lenke til API dokumentasjon
+
+

@@ -55,7 +55,7 @@ export class StunMessage{
 
     stunMessage.REQUEST_TYPE = StunMessage.STUN_ATTRIBUTES[header.readInt16BE()]
     stunMessage.MESSAGE_LENGTH = header.readInt16BE(2)
-    // if (header.subarray(...StunMessage.HEADER_DATA.MAGIC_COOKIE) != StunMessage.MAGIC_COOKIE) throw 'Incorrect magic cookie'
+    if (header.subarray(...StunMessage.HEADER_DATA.MAGIC_COOKIE) != StunMessage.MAGIC_COOKIE) throw 'Incorrect magic cookie'
     stunMessage.TRANSACTION_ID = header.subarray(...StunMessage.HEADER_DATA.TRANSACTION_ID)
 
     return stunMessage
