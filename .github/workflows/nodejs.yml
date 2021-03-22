@@ -1,4 +1,4 @@
-name: Node.js CI
+name: Integrate and deploy
 
 on: [push]
 
@@ -9,10 +9,18 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - uses: volta-cli/action@v1
+
+    - name: install dependencies
     - run: npm ci --no-audit
-    - run: npm run lint --if-present
+
+    - name: do linting
+    - run: npm run lint --verbose
+    
+    - name: do tests
     - run: npm test
+
+    - name: try to build
     - run: npm run build --if-present
-      env:
+      
+    env:
         CI: true
