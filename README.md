@@ -1,3 +1,4 @@
+![example workflow](https://github.com/Jesper-Hustad/STUN-server/actions/workflows/main.yml/badge.svg)
 # STUN-server
 
 
