@@ -1,4 +1,5 @@
 import { Attribute } from './attribute';
+import { ErrorCode } from '../util/interfaces';
 
 /**
  *  A error code type of attribute, encoded like this:
@@ -12,9 +13,9 @@ import { Attribute } from './attribute';
  *  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
  */
 
-export class ErrorCode extends Attribute {
+export class ErrorResponse extends Attribute {
 
-  constructor(error : errorCode) {
+  constructor(error : ErrorCode) {
 
     const hundreds = Math.floor(error.code / 100)
     const rest = error.code % 100

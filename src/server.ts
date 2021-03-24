@@ -2,9 +2,9 @@ import * as udp  from 'dgram'
 import { logger } from './util/logger';
 import { Message } from './message';
 import { XorMappedAddress } from './attributes/xorMappedAddress';
-import { ErrorCode } from './attributes/errorCode';
+import { ErrorResponse } from './attributes/errorResponse';
 import { Attribute } from './attributes/attribute';
-
+import { ErrorCode, rinfo } from './util/interfaces';
 
 export class Server {
 
@@ -76,7 +76,7 @@ export class Server {
       const value =  new Buffer([new Array(12).fill(0)])
 
       const response = new Message(type, className, value)
-      response.addAttribute(new ErrorCode(error))
+      response.addAttribute(new ErrorResponse(error))
 
       return response
     }

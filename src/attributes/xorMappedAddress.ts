@@ -1,5 +1,6 @@
 import { Attribute } from './attribute';
 import { MAGIC_COOKIE_BYTES } from '../const';
+import { rinfo } from '../util/interfaces';
 
 /**
  *  The MAPPED-ATTRIBUTE as defined in [RFC5389]{@link https://tools.ietf.org/html/rfc5389#section-15.1}

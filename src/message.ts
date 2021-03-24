@@ -1,6 +1,7 @@
 import { Attribute } from './attributes/attribute';
 import { logger } from './util/logger';
 import { REQUEST_TYPES, CLASSES, MAGIC_COOKIE, REQUEST_TYPES_BYTES, CLASSES_BYTES, MAGIC_COOKIE_BYTES } from './const';
+import { ErrorCode} from './util/interfaces';
 
 export class Message {
 
