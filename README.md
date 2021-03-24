@@ -1,8 +1,7 @@
 ![example workflow](https://github.com/Jesper-Hustad/STUN-server/actions/workflows/main.yml/badge.svg)
 # STUN-server
 
-
-Navn på STUN-serveren og eventuell lenke til siste continuous integration/deployment kjøring
+STUN-server (Session Traversal Utilities for NAT) currently being hosted on my own Ubuntu server with domain `jesperhustad.com` running Ubuntu 20.04.2 LTS
 
 Introduksjon
 ## Introduction
