@@ -21,12 +21,12 @@ class StunMessage {
      * @param header
      */
     static fromHeader(header) {
+        const magicCookie = header.readUInt32BE(4);
+        if (StunMessage.MAGIC_COOKIE != magicCookie)
+            throw 'Incorrect magic cookie';
         const stunMessage = new StunMessage();
-        // const messageTypeNumber = header.subarray(...StunMessage.HEADER_DATA.MESSAGE_TYPE)
         stunMessage.REQUEST_TYPE = StunMessage.STUN_ATTRIBUTES[header.readInt16BE()];
         stunMessage.MESSAGE_LENGTH = header.readInt16BE(2);
-        if (header.subarray(...StunMessage.HEADER_DATA.MAGIC_COOKIE) != StunMessage.MAGIC_COOKIE)
-            throw 'Incorrect magic cookie';
         stunMessage.TRANSACTION_ID = header.subarray(...StunMessage.HEADER_DATA.TRANSACTION_ID);
         return stunMessage;
     }
@@ -48,8 +48,8 @@ StunMessage.STUN_ATTRIBUTES = {
 StunMessage.HEADER_DATA = {
     MESSAGE_TYPE: [0, 1],
     MESSAGE_LENGTH: [2, 3],
-    MAGIC_COOKIE: [4, 7],
+    MAGIC_COOKIE: [4, 8],
     TRANSACTION_ID: [8, 20]
 };
-StunMessage.MAGIC_COOKIE = Buffer.from([0x21, 0x12, 0xA4, 0x42]);
+StunMessage.MAGIC_COOKIE = 0x2112A442;
 //# sourceMappingURL=stunMessage.js.map
