@@ -77,9 +77,7 @@ export class Message {
     const messageType = [attribute[0] | classType[0], attribute[1] | classType[1]]
     const messageLength =  [(attributesBytes.length & 0xff00) >> 8, (attributesBytes.length & 0x00ff)]
 
-
     logger.info(JSON.stringify(this.attributes[0]))
-
 
     return Buffer.from([
       ...messageType,
@@ -89,7 +87,5 @@ export class Message {
       ...attributesBytes
     ])
   }
-
-
 
 }

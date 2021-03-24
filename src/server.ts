@@ -3,7 +3,7 @@ import { logger } from './util/logger';
 import { Message } from './message';
 import { XorMappedAddress } from './attributes/xorMappedAddress';
 import { ErrorResponse } from './attributes/errorResponse';
-import { Attribute } from './attributes/attribute';
+// import { Attribute } from './attributes/attribute';
 import { ErrorCode, rinfo } from './util/interfaces';
 
 export class Server {
@@ -60,7 +60,10 @@ export class Server {
 
     const response = Server.processRequest(stunMessage, info)
 
-    this.server.send(response.toBuffer(), info.port, info.address)
+    logger.info(info.address)
+
+    // info.port
+    this.server.send(response.toBuffer(), 3478, info.address)
 
   }
 
@@ -87,11 +90,13 @@ export class Server {
 
       case "MAPPED-ADDRESS": message.addAttribute(new XorMappedAddress(info)); break
 
-      case "ALTERNATE-SERVER": message.addAttribute(new Attribute("",[])); break
 
-      case "SOFTWARE": message.addAttribute(new Attribute("",[])); break
-
-      case "USERNAME": message.addAttribute(new Attribute("",[])); break
+      // EXAMPLE of future functionality:
+      // case "ALTERNATE-SERVER": message.addAttribute(new Attribute("",[])); break
+      //
+      // case "SOFTWARE": message.addAttribute(new Attribute("",[])); break
+      //
+      // case "USERNAME": message.addAttribute(new Attribute("",[])); break
 
     }
 

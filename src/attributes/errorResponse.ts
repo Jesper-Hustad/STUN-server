@@ -2,15 +2,7 @@ import { Attribute } from './attribute';
 import { ErrorCode } from '../util/interfaces';
 
 /**
- *  A error code type of attribute, encoded like this:
- *
- *  0                   1                   2                   3
- *  0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
- *  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
- *  |           Reserved, should be 0         |Class|     Number    |
- *  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
- *  |      Reason Phrase (variable)                                ..
- *  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+ *  A error code type of attribute
  */
 
 export class ErrorResponse extends Attribute {
