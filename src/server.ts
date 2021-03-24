@@ -16,7 +16,7 @@ export class Server {
     this.server = udp.createSocket('udp4')
 
     this.server.on('message', (d, i) => {
-      logger.info(`${d}`)
+      logger.info(`${JSON.stringify(i)}  :  ${d}`)
       this.handleRequest(d, i)
     });
 

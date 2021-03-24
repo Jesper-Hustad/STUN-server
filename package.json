@@ -1,7 +1,7 @@
 {
-  "name": "node-typescript-boilerplate",
+  "name": "typescript-stun-server",
   "version": "0.0.0",
-  "description": "Minimalistic boilerplate to quick-start Node.js development in TypeScript.",
+  "description": "Simple stun server built in typescript.",
   "engines": {
     "node": ">= 15"
   },
@@ -30,8 +30,7 @@
     "test:watch": "jest --watch",
     "doc": "npx typedoc ./src/"
   },
-  "author": "Jakub Synowiec <github@jakubsynowiec.info>",
-  "license": "Apache-2.0",
+  "author": "Jesper Hustad",
   "dependencies": {
     "tslib": "~2.1.0",
     "typedoc": "^0.20.32",
