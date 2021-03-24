@@ -3,38 +3,22 @@ import { logger } from './util/logger';
 import { Message } from './message';
 import { XorMappedAddress } from './attributes/xorMappedAddress';
 import { ErrorResponse } from './attributes/errorResponse';
-// import { Attribute } from './attributes/attribute';
 import { ErrorCode, rinfo } from './util/interfaces';
 
+/**
+ * A STUN server following RFC 5389 protocols
+ */
 export class Server {
 
   private readonly PORT = 3478;
   private server;
 
   constructor() {
-    // const net = require('net');
     this.server = udp.createSocket('udp4')
 
-    this.server.on('message', (d, i) => {
-      logger.info(`${JSON.stringify(i)}  :  ${d}`)
-      this.handleRequest(d, i)
-    });
+    this.server.on('message', this.handleRequest);
 
-    // this.server = net.createServer((c) => {
-    //
-    //   logger.info("client connected");
-    //
-    //   c.on('end', () => {
-    //     logger.info('client disconnected');
-    //   });
-    //
-    //   c.write('hello\r\n');
-    //
-    //   c.on('data', Server.handleRequest)
-    // });
-    this.server.on('listening', () =>
-      logger.info(`A server listening ${this.server.address().address}:${this.server.address().port}`)
-    )
+    this.server.on('listening', () => logger.info(`Listening ${this.server.address().address}:${this.server.address().port}`))
 
     this.server.on('error', (err) => {throw err });
   }
@@ -45,29 +29,33 @@ export class Server {
   start(): void {
 
     this.server.bind(this.PORT);
-
   }
 
 
+  /**
+   * Decodes received data, creates a response, and sends the response encoded
+   * @param data received from client
+   * @param info about client
+   * @private
+   */
   private handleRequest(data : Buffer, info : rinfo): void {
 
-    logger.info("connection happened")
-    logger.info(data.toString('hex'))
+    logger.info(`connection from ${info.address}:${info.port}`)
 
     const stunMessage = Message.fromBuffer(data)
 
-    logger.info(JSON.stringify(stunMessage))
-
     const response = Server.processRequest(stunMessage, info)
 
-    logger.info(info.address)
-
-    //
     this.server.send(response.toBuffer(), info.port, info.address)
-
   }
 
 
+  /**
+   * Generates different types of stun messages given a request
+   * @param message received
+   * @param info about udp packet
+   * @private
+   */
   private static processRequest(message : Message | ErrorCode, info : rinfo) : Message {
 
     if(message instanceof ErrorCode) {
@@ -86,6 +74,7 @@ export class Server {
 
     message.className = "SUCCESS-RESPONSE"
 
+    // switch for future attributes
     switch (message.requestType) {
 
       case "MAPPED-ADDRESS": message.addAttribute(new XorMappedAddress(info)); break

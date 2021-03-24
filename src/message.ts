@@ -1,10 +1,13 @@
 import { Attribute } from './attributes/attribute';
 import { logger } from './util/logger';
-import { REQUEST_TYPES, CLASSES, MAGIC_COOKIE, REQUEST_TYPES_BYTES, CLASSES_BYTES, MAGIC_COOKIE_BYTES } from './const';
 import { ErrorCode} from './util/interfaces';
+import { REQUEST_TYPES, CLASSES, MAGIC_COOKIE, REQUEST_TYPES_BYTES, CLASSES_BYTES, MAGIC_COOKIE_BYTES } from './const';
 
+/**
+ * Defines a STUN message
+ * With methods to decode and encode
+ */
 export class Message {
-
 
   public requestType : string
   className : string
@@ -22,7 +25,7 @@ export class Message {
 
   /**
    * Generate a STUN message from existing header
-   * Check that the message obeys of the rules of [rfc5389 Section 6]{@link https://tools.ietf.org/html/rfc5389#section-6}
+   * Check that the message obeys the rules of [rfc5389 Section 6]{@link https://tools.ietf.org/html/rfc5389#section-6}
    * @param data
    */
   static fromBuffer(data : Buffer) : Message | ErrorCode{

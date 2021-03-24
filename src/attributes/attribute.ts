@@ -1,5 +1,8 @@
 import { REQUEST_TYPES_BYTES } from '../const';
 
+/**
+ * A class to be extended that can handle any current and future attribute
+ */
 export class Attribute{
 
   type : string

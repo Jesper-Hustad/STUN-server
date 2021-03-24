@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <h2>Nettverksprogrammering Frivillig oppgave</h2>
+    <h1>STUN og WebRTC</h1>
+    <p>Send meldinger til andre klienter peer 2 peer</p>
+
+    <input id=inn><button onclick="sendMessage()">Send trough WebRTC</button>
+    <br><br>
+    <div id="chat"></div>
+
+    <h2>Setup</h2>
+
+    <br><br>
+    <div id="select-fields">
+        <button onclick="
+            document.getElementById('sendButton').onclick = generateAnswer
+            document.getElementById('select-fields').classList.toggle('hidden')
+            document.getElementById('data-fields').classList.toggle('hidden')
+            document.getElementById('explenation').textContent = 'Sett in data fra venn og så send svar'
+        ">Motta</button> 
+
+        eller 
+        
+        <button onclick="
+            generateOffer()
+            document.getElementById('sendButton').onclick = acceptAnswer
+            document.getElementById('select-fields').classList.toggle('hidden')
+            document.getElementById('data-fields').classList.toggle('hidden')
+            document.getElementById('explenation').textContent = 'Send dataen til din venn og aksepter svar'
+        ">Generer</button> 
+        
+        WebRTC Offer
+
+    </div>
+
+    <br><br>
+    <div id="data-fields" class="hidden">
+        <p id='explenation'></p>
+        <input type="text" name="" id="inp"><button id="sendButton">Bruk</button>
+        <br>
+        <p>Send dataen her til andre klienten:</p>
+        <textarea id="tx"></textarea>
+
+        <br><br>
+    </div>
+
+
+
+</body>
+
+
+<script>
+
+const stunServer = 'stun:jesperhustad.com:3478'
+var WebRTCConnection = new RTCPeerConnection({iceServers: [{urls: stunServer}]})
+
+var chatChannel 
+
+async function generateAnswer(){
+
+    const remoteDescription = JSON.parse(document.getElementById("inp").value)
+
+    WebRTCConnection.ondatachannel = (event) => {
+        if (event.channel.label == 'chat') {
+            chatChannel = event.channel 
+            chatChannel.onmessage = (event) => addChatMessage('Friend: ' + event.data) 
+            chatChannel.onopen = () => console.log('onopen') 
+            chatChannel.onclose = () => console.log('onclose')
+        }
+
+    } 
+
+    WebRTCConnection.onicecandidate = (event) => {
+    if (event.candidate)
+        document.getElementById("tx").textContent = JSON.stringify(WebRTCConnection.localDescription)
+    } 
+
+    WebRTCConnection.setRemoteDescription(remoteDescription) 
+
+    WebRTCConnection.createAnswer().then((localDescription) => {
+    WebRTCConnection.setLocalDescription(localDescription) 
+    }) 
+
+}
+
+
+async function generateOffer(){
+    chatChannel = WebRTCConnection.createDataChannel('chat');
+    chatChannel.onmessage = (event) => addChatMessage('Friend: ' + event.data)
+    chatChannel.onopen = () => console.log('onopen');
+    chatChannel.onclose = () => console.log('onclose');
+
+    WebRTCConnection.onicecandidate = (event) => {
+    if (event.candidate)
+    document.getElementById("tx").textContent = JSON.stringify(WebRTCConnection.localDescription)
+        // console.log('localDescription:', JSON.stringify(WebRTCConnection.localDescription));
+    };
+
+    WebRTCConnection.createOffer().then((localDescription) => {
+    WebRTCConnection.setLocalDescription(localDescription);
+    });
+}
+
+function acceptAnswer(){
+    const remoteDescription = JSON.parse(document.getElementById("inp").value);
+    WebRTCConnection.setRemoteDescription(remoteDescription);
+}
+
+function sendMessage(){
+        const message = document.getElementById('inn').value
+        chatChannel.send(message)
+        addChatMessage("Me: " + message)
+    }
+
+function addChatMessage(message){
+        const chatDiv = document.getElementById("chat")
+        const newDiv = document.createElement("div")
+        const newMessage = document.createTextNode(message)
+        newDiv.appendChild(newMessage)
+        chatDiv.appendChild(newDiv)
+    } 
+
+</script>
+
+
+
+
+<style>
+    :root {font-family: Arial, Helvetica, sans-serif;}
+    #chat{width: 20rem; height: 10rem; overflow: scroll; border: 1px solid black;}
+    .hidden{display: none;}
+</style>
+
+</html>

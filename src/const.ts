@@ -1,4 +1,4 @@
-const REQUEST_TYPES : Record<number, string>= {
+const REQUEST_TYPES = {
   0x0001 : "MAPPED-ADDRESS",
   0x0006 : "USERNAME",
   0x0008 : "MESSAGE-INTEGRITY",
@@ -26,20 +26,6 @@ const REQUEST_TYPES_BYTES = {
    "FINGERPRINT" : [0x80, 0x28],
 }
 
-// const MESSAGE_ATTRIBUTES = {
-//   0x0001 : "MAPPED-ADDRESS",
-//   0x0002 : "RESPONSE-ADDRESS",
-//   0x0003 : "CHANGE-REQUEST",
-//   0x0004 : "SOURCE-ADDRESS",
-//   0x0005 : "CHANGED-ADDRESS",
-//   0x0006 : "USERNAME",
-//   0x0007 : "PASSWORD",
-//   0x0008 : "MESSAGE-INTEGRITY",
-//   0x0009 : "ERROR-CODE",
-//   0x000a : "UNKNOWN-ATTRIBUTES",
-//   0x000b : "REFLECTED-FROM"
-// }
-
 const CLASSES = {
   0x0000 : "REQUEST",
   0x0010 : "INDICATION",
@@ -53,11 +39,6 @@ const CLASSES_BYTES = {
   "SUCCESS-RESPONSE" : [0x01, 0x00],
   "ERROR-RESPONSE" : [0x01, 0x10]
 }
-
-// const MESSAGE_ATTRIBUTES_NAMES = Object.entries(MESSAGE_ATTRIBUTES).map( ([k, v]) => [v, Number(k)])
-
-
-
 
 const MAGIC_COOKIE = 0x2112A442
 const MAGIC_COOKIE_BYTES = [0x21, 0x12, 0xA4, 0x42]

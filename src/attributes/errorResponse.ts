@@ -2,7 +2,7 @@ import { Attribute } from './attribute';
 import { ErrorCode } from '../util/interfaces';
 
 /**
- *  A error code type of attribute
+ *  A error code message attribute
  */
 
 export class ErrorResponse extends Attribute {
