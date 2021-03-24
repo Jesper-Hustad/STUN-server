@@ -1,5 +1,6 @@
 // import { Delays, greeter } from '../src/main';
-import { StunMessage } from '../src/stunMessage';
+import { Message } from '../src/message';
+import { Attribute } from '../src/attributes/attribute';
 
 
 // describe('greeter function', () => {
@@ -47,15 +48,26 @@ describe("STUN message", () => {
 
     const testHeader = Buffer.from([...requestType,  ...messageLength,  ...magicCookie, ...transactionId])
 
-    const stunMessage = StunMessage.fromHeader(testHeader)
+    const stunMessage = Message.fromBuffer(testHeader)
 
     expect(stunMessage).toMatchObject(
-      new StunMessage(
+      new Message(
         "USERNAME",
-        160,
+        "SUCCESS-RESPONSE",
         Buffer.from(transactionId)
       )
     )
 
   })
 })
+
+describe('STUN attribute', () => {
+  it('generates a buffer correctly', () => {
+    const attribute = new Attribute('MAPPED-ADDRESS',Buffer.from([0x04,0x20]))
+
+    expect(attribute.toBuffer()).toMatchObject(Buffer.from([0x0001, 2, 0x04, 0x20]))
+
+  })
+})
+
+

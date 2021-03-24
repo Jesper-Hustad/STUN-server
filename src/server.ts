@@ -1,11 +1,12 @@
 import * as udp  from 'dgram'
 import { logger } from './util/logger';
-import { StunMessage } from './stunMessage';
+import { Message } from './message';
+import { XorMappedAddress } from './attributes/xorMappedAddress';
+import { ErrorCode } from './attributes/errorCode';
+import { Attribute } from './attributes/attribute';
 
 
-
-
-export class StunServer{
+export class Server {
 
   private readonly PORT = 3478;
   private server;
@@ -14,9 +15,9 @@ export class StunServer{
     // const net = require('net');
     this.server = udp.createSocket('udp4')
 
-    this.server.on('message', (d) => {
+    this.server.on('message', (d, i) => {
       logger.info(`${d}`)
-      this.handleRequest(d)
+      this.handleRequest(d, i)
     });
 
     // this.server = net.createServer((c) => {
@@ -29,7 +30,7 @@ export class StunServer{
     //
     //   c.write('hello\r\n');
     //
-    //   c.on('data', StunServer.handleRequest)
+    //   c.on('data', Server.handleRequest)
     // });
     this.server.on('listening', () =>
       logger.info(`A server listening ${this.server.address().address}:${this.server.address().port}`)
@@ -48,15 +49,55 @@ export class StunServer{
   }
 
 
-  private handleRequest(data : Buffer): void {
+  private handleRequest(data : Buffer, info : rinfo): void {
 
     logger.info("connection happened")
     logger.info(data.toString('hex'))
 
-    const stunMessage = StunMessage.fromHeader(data.subarray(0,20))
+    const stunMessage = Message.fromBuffer(data)
 
     logger.info(JSON.stringify(stunMessage))
+
+    const response = Server.processRequest(stunMessage, info)
+
+    this.server.send(response.toBuffer(), info.port, info.address)
+
   }
 
-}
 
+  private static processRequest(message : Message | ErrorCode, info : rinfo) : Message {
+
+    if(message instanceof ErrorCode) {
+
+      const error = message
+
+      const type = "ERROR-CODE"
+      const className = "ERROR-RESPONSE"
+      const value =  new Buffer([new Array(12).fill(0)])
+
+      const response = new Message(type, className, value)
+      response.addAttribute(new ErrorCode(error))
+
+      return response
+    }
+
+    message.className = "SUCCESS-RESPONSE"
+
+    switch (message.requestType) {
+
+      case "MAPPED-ADDRESS": message.addAttribute(new XorMappedAddress(info)); break
+
+      case "ALTERNATE-SERVER": message.addAttribute(new Attribute("",[])); break
+
+      case "SOFTWARE": message.addAttribute(new Attribute("",[])); break
+
+      case "USERNAME": message.addAttribute(new Attribute("",[])); break
+
+    }
+
+    return message
+
+  }
+
+
+}

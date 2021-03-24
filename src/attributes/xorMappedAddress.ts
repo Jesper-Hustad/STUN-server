@@ -4,10 +4,8 @@ import { MAGIC_COOKIE_BYTES } from '../const';
 /**
  *  The MAPPED-ATTRIBUTE as defined in [RFC5389]{@link https://tools.ietf.org/html/rfc5389#section-15.1}
  */
-export class MappedAddress extends Attribute {
+export class XorMappedAddress extends Attribute {
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars,@typescript-eslint/ban-ts-comment
-  // @ts-ignore
   constructor(data : rinfo) {
 
     const port = data.port
@@ -20,7 +18,7 @@ export class MappedAddress extends Attribute {
 
     const ipv4 = 0x01
 
-    const value = Buffer.from([0x00, ipv4, ...xorPortBytes, ...xorIpBytes])
+    const value = [0x00, ipv4, ...xorPortBytes, ...xorIpBytes]
 
 
     super('XOR-MAPPED-ADDRESS', value);

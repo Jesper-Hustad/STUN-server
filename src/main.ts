@@ -1,4 +1,4 @@
-import { StunServer } from './stunServer';
+import { Server } from './server';
 
 
 /**
@@ -34,7 +34,7 @@ export async function greeter(name: string) {
   return await delayedHello(name, Delays.Long);
 }
 
-const server = new StunServer();
+const server = new Server();
 
 server.start()
 

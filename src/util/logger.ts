@@ -2,4 +2,4 @@ import {Category,CategoryServiceFactory,CategoryConfiguration,LogLevel} from "ty
 
 CategoryServiceFactory.setDefaultConfiguration(new CategoryConfiguration(LogLevel.Info));
 
-export const logger = new Category("service");
+export const logger = new Category("server");

@@ -1,15 +1,24 @@
+import { REQUEST_TYPES_BYTES } from '../const';
+
 export class Attribute{
-  type : number
-  length : number
+
+  type : string
   value : Buffer
 
+  constructor(type: string, value: number[]) {
 
-  constructor(type: number, length: number, value: Buffer) {
+    const fill = new Array(value.length % 4).fill(0)
+
     this.type = type;
-    this.length = length;
-    this.value = value;
+    this.value = Buffer.from([...value, ...fill]);
   }
 
-  
+  toBuffer() : Buffer {
+
+    const type = REQUEST_TYPES_BYTES[this.type]
+    const length = [(this.value.length & 0xff00) >> 8, (this.value.length & 0x00ff)]
+
+    return Buffer.from([...type, ...length, ...this.value])
+  }
 
 }
