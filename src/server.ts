@@ -62,8 +62,8 @@ export class Server {
 
     logger.info(info.address)
 
-    // info.port
-    this.server.send(response.toBuffer(), 3478, info.address)
+    //
+    this.server.send(response.toBuffer(), info.port, info.address)
 
   }
 
@@ -89,14 +89,6 @@ export class Server {
     switch (message.requestType) {
 
       case "MAPPED-ADDRESS": message.addAttribute(new XorMappedAddress(info)); break
-
-
-      // EXAMPLE of future functionality:
-      // case "ALTERNATE-SERVER": message.addAttribute(new Attribute("",[])); break
-      //
-      // case "SOFTWARE": message.addAttribute(new Attribute("",[])); break
-      //
-      // case "USERNAME": message.addAttribute(new Attribute("",[])); break
 
     }
 
