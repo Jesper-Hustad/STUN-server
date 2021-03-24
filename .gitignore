@@ -27,3 +27,6 @@ build/
 
 # Misc
 .DS_Store
+
+# loads incorectly in ubuntu
+tsconfig.release.json
