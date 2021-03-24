@@ -67,42 +67,87 @@
 				<a href="#introduction" id="introduction" style="color: inherit; text-decoration: none;">
 					<h2>Introduction</h2>
 				</a>
-				<p>Implementert funksjonalitet</p>
+				<p>You can test the STUN server that is running live at <code>stun:stun.jesperhustad.com:3478</code> at <a href="https://webrtc.github.io/samples/src/content/peerconnection/trickle-ice/">this</a> website by the Google/WebRTC foundation.</p>
+				<p>There is a simple demo client i made to see it working <a href="https://jesper-hustad.github.io/STUN-server/client/index.html">here</a></p>
 				<a href="#implemented-functionality" id="implemented-functionality" style="color: inherit; text-decoration: none;">
 					<h2>Implemented functionality</h2>
 				</a>
-				<p>Fremtidig arbeid med oversikt over nåværende mangler</p>
+				<ul>
+					<li>XOR Mapped address</li>
+					<li>Error response </li>
+					<li>Unit tests</li>
+					<li>Linting</li>
+					<li>YAML Actions</li>
+					<li>Documentation</li>
+					<li>Simple client</li>
+					<li>Extendable classes</li>
+					<li>Implemented with scale </li>
+					<li>Written in typescript</li>
+				</ul>
 				<a href="#future-goals" id="future-goals" style="color: inherit; text-decoration: none;">
 					<h2>Future goals</h2>
 				</a>
+				<ul>
+					<li>Add more STUN features from the RFC standards</li>
+					<li>Implement signaling server</li>
+				</ul>
 				<a href="#limitations" id="limitations" style="color: inherit; text-decoration: none;">
 					<h2>Limitations</h2>
 				</a>
-				<p>Eksterne avhengigheter med en kort beskrivelse av hver avhengighet og hva den er brukt til</p>
-				<a href="#external-dependencies" id="external-dependencies" style="color: inherit; text-decoration: none;">
-					<h2>External dependencies</h2>
+				<ul>
+					<li>Missing features from the specifications</li>
+					<li>Implement more tests</li>
+				</ul>
+				<a href="#setup" id="setup" style="color: inherit; text-decoration: none;">
+					<h2>Setup</h2>
 				</a>
-				<a href="#setup--getting-starded" id="setup--getting-starded" style="color: inherit; text-decoration: none;">
-					<h2>Setup / Getting starded</h2>
-				</a>
-				<p>Installasjonsinstruksjoner
-				Instruksjoner for å starte STUN-serveren</p>
+				<p>To install and run the stun server</p>
+				<pre><code><span style="color: #001080">git</span><span style="color: #000000"> </span><span style="color: #001080">clone</span><span style="color: #000000"> https:</span><span style="color: #008000">//github.com/Jesper-Hustad/STUN-server.git</span>
+<span style="color: #001080">cd</span><span style="color: #000000"> </span><span style="color: #0070C1">STUN</span><span style="color: #000000">-</span><span style="color: #001080">server</span>
+<span style="color: #001080">npm</span><span style="color: #000000"> </span><span style="color: #001080">install</span>
+<span style="color: #001080">npm</span><span style="color: #000000"> </span><span style="color: #001080">start</span>
+<span style="color: #098658">2021</span><span style="color: #000000">-</span><span style="color: #098658">03</span><span style="color: #000000">-</span><span style="color: #098658">24</span><span style="color: #000000"> </span><span style="color: #098658">16</span><span style="color: #000000">:</span><span style="color: #098658">15</span><span style="color: #000000">:</span><span style="color: #098658">40</span><span style="color: #000000">,</span><span style="color: #098658">992</span><span style="color: #000000"> </span><span style="color: #0070C1">INFO</span><span style="color: #000000"> [</span><span style="color: #001080">server</span><span style="color: #000000">] </span><span style="color: #001080">Listening</span><span style="color: #000000"> </span><span style="color: #001080">on</span><span style="color: #000000"> </span><span style="color: #001080">port</span><span style="color: #000000"> </span><span style="color: #098658">3478</span>
+</code></pre>
 				<a href="#tests" id="tests" style="color: inherit; text-decoration: none;">
 					<h2>Tests</h2>
 				</a>
-				<p>Hvordan en kan kjøre eventulle tester</p>
-				<a href="#links" id="links" style="color: inherit; text-decoration: none;">
-					<h2>Links</h2>
+				<p>To run test follow setup instructions above and run</p>
+				<pre><code><span style="color: #000000">~</span><span style="color: #001080">$</span><span style="color: #000000"> </span><span style="color: #001080">npm</span><span style="color: #000000"> </span><span style="color: #001080">test</span>
+
+<span style="color: #000000"> </span><span style="color: #0070C1">PASS</span><span style="color: #000000">  </span><span style="color: #001080">__tests__</span><span style="color: #000000">/</span><span style="color: #001080">main</span><span style="color: #000000">.</span><span style="color: #001080">test</span><span style="color: #000000">.</span><span style="color: #001080">ts</span>
+<span style="color: #000000">  </span><span style="color: #0070C1">STUN</span><span style="color: #000000"> </span><span style="color: #001080">message</span>
+<span style="color: #000000">    √ </span><span style="color: #001080">parses</span><span style="color: #000000"> </span><span style="color: #001080">a</span><span style="color: #000000"> </span><span style="color: #001080">frame</span><span style="color: #000000"> </span><span style="color: #001080">header</span><span style="color: #000000"> </span><span style="color: #001080">from</span><span style="color: #000000"> </span><span style="color: #001080">buffer</span><span style="color: #000000"> </span><span style="color: #795E26">correctly</span><span style="color: #000000"> (</span><span style="color: #098658">6</span><span style="color: #000000"> </span><span style="color: #001080">ms</span><span style="color: #000000">)</span>
+
+<span style="color: #001080">Test</span><span style="color: #000000"> Suites: </span><span style="color: #098658">1</span><span style="color: #000000"> </span><span style="color: #001080">passed</span><span style="color: #000000">, </span><span style="color: #098658">1</span><span style="color: #000000"> </span><span style="color: #001080">total</span>
+<span style="color: #000000">Tests:       </span><span style="color: #098658">1</span><span style="color: #000000"> </span><span style="color: #001080">passed</span><span style="color: #000000">, </span><span style="color: #098658">1</span><span style="color: #000000"> </span><span style="color: #001080">total</span>
+<span style="color: #000000">Snapshots:   </span><span style="color: #098658">0</span><span style="color: #000000"> </span><span style="color: #001080">total</span>
+<span style="color: #000000">Time:        </span><span style="color: #098658">1.343</span><span style="color: #000000"> </span><span style="color: #001080">s</span><span style="color: #000000">, </span><span style="color: #001080">estimated</span><span style="color: #000000"> </span><span style="color: #098658">3</span><span style="color: #000000"> </span><span style="color: #001080">s</span>
+</code></pre>
+				<a href="#documentation" id="documentation" style="color: inherit; text-decoration: none;">
+					<h2>Documentation</h2>
 				</a>
-				<a href="#--documentation" id="--documentation" style="color: inherit; text-decoration: none;">
-					<h3>- <a href="https://jesper-hustad.github.io/STUN-server/index.html">Documentation</a></h3>
+				<p>Read trough the <a href="https://jesper-hustad.github.io/STUN-server/docs/index.html">Documentation</a> for a better understanding of the inner workings of the code.</p>
+				<a href="#external-dependencies" id="external-dependencies" style="color: inherit; text-decoration: none;">
+					<h2>External dependencies</h2>
 				</a>
-				<p>Read trough the documentation for a better understanding of the inner workings of the code.</p>
-				<a href="#--api-docs" id="--api-docs" style="color: inherit; text-decoration: none;">
-					<h3>- API docs</h3>
+				<ul>
+					<li><strong>Typescript Logging:</strong> A simple logging library</li>
+				</ul>
+				<a href="#frameworks" id="frameworks" style="color: inherit; text-decoration: none;">
+					<h2>Frameworks</h2>
 				</a>
-				<p>Find available endpoints, our api is documented in swagger.</p>
-				<p>Eventuell lenke til API dokumentasjon</p>
+				<ul>
+					<li><p><strong>Typescript:</strong> Language for type safety in javascript</p>
+					</li>
+					<li><p><strong>Jest:</strong> Testing framework</p>
+					</li>
+					<li><p><strong>EsLint:</strong> A linting framework</p>
+					</li>
+					<li><p><strong>TypeDoc:</strong> Generates documentation </p>
+					</li>
+					<li><p><strong>Prettier:</strong> Enforces code format</p>
+					</li>
+				</ul>
 			</div>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
