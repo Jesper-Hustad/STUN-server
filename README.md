@@ -1,13 +1,13 @@
 ![example workflow](https://github.com/Jesper-Hustad/STUN-server/actions/workflows/main.yml/badge.svg)
 # STUN-server
 
-STUN-server (Session Traversal Utilities for NAT) currently being hosted on my own Ubuntu server with domain `jesperhustad.com` running Ubuntu 20.04.2 LTS
+STUN-server (Session Traversal Utilities for NAT)
 
 ## Introduction
 
-You can test the STUN server that is running live at `stun:stun.jesperhustad.com:3478` with [this website](https://webrtc.github.io/samples/src/content/peerconnection/trickle-ice/) by the Google/WebRTC foundation.
+<!-- You can test the STUN server that is running live at `stun:stun.jesperhustad.com:3478` with [this website](https://webrtc.github.io/samples/src/content/peerconnection/trickle-ice/) by the Google/WebRTC foundation.
 
-There is a simple demo client i made you can see it working [here](https://jesper-hustad.github.io/STUN-server/client/index.html)
+There is a simple demo client i made you can see it working [here](https://jesper-hustad.github.io/STUN-server/client/index.html) -->
 
 
 
